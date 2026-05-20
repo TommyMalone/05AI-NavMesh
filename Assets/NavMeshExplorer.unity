@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000009536743
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1206,6 +1206,7 @@ GameObject:
   - component: {fileID: 1079990394}
   - component: {fileID: 1079990399}
   - component: {fileID: 1079990398}
+  - component: {fileID: 1079990400}
   m_Layer: 0
   m_Name: RedAgent
   m_TagString: Untagged
@@ -1315,7 +1316,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079990393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93b8271266609984183dbf81793cb823, type: 3}
   m_Name: 
@@ -1350,6 +1351,23 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1079990400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079990393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db06bb94549c184e9e23acf502e27db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowPlayer
+  target: {fileID: 1953312500}
+  agent: {fileID: 1079990399}
+  simpleMaskDistance: 2
+  allowedAreasMask: 17
+  raycastDistance: 1000
 --- !u!1001 &1103625406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2063,7 +2081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1756655611
 Transform:
   m_ObjectHideFlags: 0
@@ -2094,6 +2112,7 @@ GameObject:
   - component: {fileID: 1893246664}
   - component: {fileID: 1893246662}
   - component: {fileID: 1893246668}
+  - component: {fileID: 1893246669}
   m_Layer: 0
   m_Name: GreenAgent
   m_TagString: Untagged
@@ -2225,7 +2244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893246661}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93b8271266609984183dbf81793cb823, type: 3}
   m_Name: 
@@ -2238,6 +2257,28 @@ MonoBehaviour:
   simpleMaskDistance: 2
   allowedAreasMask: -1
   raycastDistance: 1000
+--- !u!114 &1893246669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893246661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db06bb94549c184e9e23acf502e27db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowPlayer
+  target: {fileID: 1953312500}
+  agent: {fileID: 1893246662}
+  simpleMaskDistance: 2
+  allowedAreasMask: 9
+  raycastDistance: 1000
+--- !u!1 &1953312500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 136115975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
