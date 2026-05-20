@@ -18,16 +18,16 @@ namespace Holistic3D.Navigation {
     }
     public class ClickToMove : MonoBehaviour {
 
-        [SerializeField] private Camera _camera;
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private LayerMask _clickableMask = ~0; // which layers are valid to click (must have colliders)
-        [SerializeField] private float _simpleMaskDistance = 2.0f;  // how far we'll "snap" to the navmesh
-        [FormerlySerializedAs("_allowedAreas")] [SerializeField] private NavAreaMask _allowedAreasMask = NavAreaMask.Walkable | NavAreaMask.Water;
-        [SerializeField] private float _raycastDistance = 1000.0f;
+        [SerializeField] private Camera myCamera;
+        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private LayerMask clickableMask = ~0; // which layers are valid to click (must have colliders)
+        [SerializeField] private float simpleMaskDistance = 2.0f;  // how far we'll "snap" to the navmesh
+        [SerializeField] private NavAreaMask allowedAreasMask = NavAreaMask.Walkable | NavAreaMask.Water;
+        [SerializeField] private float raycastDistance = 1000.0f;
         private void Reset() {
             
-            _camera = Camera.main;
-            _agent = GetComponent<NavMeshAgent>();
+            myCamera = Camera.main;
+            agent = GetComponent<NavMeshAgent>();
         }
 
         void Update() {
@@ -45,14 +45,16 @@ namespace Holistic3D.Navigation {
 
         void TrySetDestination(Vector2 screenPosition)
         {
-            if (_camera != null && _agent != null)
+            if (myCamera != null && agent != null)
             {
-                Ray ray = _camera.ScreenPointToRay(screenPosition);
-                if (Physics.Raycast(ray, out RaycastHit hit, _raycastDistance, _clickableMask, QueryTriggerInteraction.Ignore))
+                Ray ray = myCamera.ScreenPointToRay(screenPosition);
+                bool didHit = Physics.Raycast(ray, out RaycastHit hit, raycastDistance, clickableMask,
+                    QueryTriggerInteraction.Ignore);
+                if (didHit)
                 {
-                    if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, _simpleMaskDistance, (int)_allowedAreasMask))
+                    if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, simpleMaskDistance, (int)allowedAreasMask))
                     {
-                        _agent.SetDestination(navHit.position);
+                        agent.SetDestination(navHit.position);
                     }
                 }
             }
@@ -61,9 +63,9 @@ namespace Holistic3D.Navigation {
         // Optional: visualise the last destination in Scene view
         private void OnDrawGizmosSelected() {
             
-            if(_agent != null) {
+            if(agent != null) {
 
-                Gizmos.DrawWireSphere(_agent.destination, 0.2f);
+                Gizmos.DrawWireSphere(agent.destination, 0.2f);
             }
         }
     }
